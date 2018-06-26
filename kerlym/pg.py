@@ -1,4 +1,5 @@
 """ Trains an agent with (stochastic) Policy Gradients on Pong. Uses OpenAI Gym. """
+from comet_ml import Experiment
 import numpy as np
 import cPickle as pickle
 import gym,keras
@@ -131,6 +132,7 @@ class PG:
 
             epdlogp *= discounted_epr # modulate the gradient with advantage (PG magic happens right here.)
 
+            experiment = Experiment(project_name='osh/kerlym')
             self.model.fit(epx, epdlogp,
                     nb_epoch=1, verbose=2, shuffle=True)
 
